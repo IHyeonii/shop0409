@@ -19,7 +19,14 @@
             location.href = '/cart/addcartimpl?item_id=' +$('#id').val();
         });
     })
+
 </script>
+
+<style>
+    .item_img{
+    width: 200px;
+    }
+</style>
 
 <section class="page-section portfolio">
     <div class="masthead container">
@@ -39,44 +46,56 @@
             <div class="col-sm-20">
                 <div class="portfolio-item mx-auto">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        <div class="portfolio-item-caption-content text-center text-white"><i
+                                class="fas fa-plus fa-3x"></i></div>
                     </div>
                 </div>
                 <form id="detail_form">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="id">ID</label>
-                            <input type="text" class="form-control" id="id" name="id" th:value="${item.getId()}" readonly>
+                            <input type="text" class="form-control" id="id" name="id" th:value="${item.getId()}"
+                                   readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="name">상품명</label>
-                            <input type="text" class="form-control" id="name" name="name" th:value="${item.getName()}" required>
+                            <input type="text" class="form-control" id="name" name="name" th:value="${item.getName()}"
+                                   required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="price">가격</label>
-                            <input type="number" class="form-control" id="price" name="price" step="1000" th:value="${item.getPrice()}" required>
+                            <input type="number" class="form-control" id="price" name="price" step="1000"
+                                   th:value="${item.getPrice()}" required>
                         </div>
                     </div>
-<!--                    수정하려면 기존 값이 있어야 하니까 th:value 로 뿌려준거야-->
+                    <!--                    수정하려면 기존 값이 있어야 하니까 th:value 로 뿌려준거야-->
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="img">상품 이미지 업로드</label>
-                            <input type="file" class="form-control" id="img" name="img">
+                            <div th:if="${session.logincust?.name =='관리자'}">
+                                <label for="img">상품 이미지 업로드</label>
+                                <input type="file" class="form-control" id="img" name="img">
+                            </div>
                             <img class="item_img" id="imgView" th:src="'/img/'+${item.getImgName()}"/>
-                            <input type="hidden" class="form-control" name="imgName" th:value="${item.getImgName()}" required>
+                            <input type="hidden" class="form-control" name="imgName" th:value="${item.getImgName()}"
+                                   required>
                         </div>
                     </div>
                 </form>
                 <div class="row">
                     <div class="col-sm-20">
-                        <button id="updateBtn" class="btn btn-secondary btn-lg">수정하기</button>
-                        <button id="deleteBtn" class="btn btn-secondary btn-lg">삭제하기</button>
+                        <button id="updateBtn" class="btn btn-secondary btn-lg"
+                                th:if="${session.logincust?.name =='관리자'}">수정하기
+                        </button>
+                        <button id="deleteBtn" class="btn btn-secondary btn-lg"
+                                th:if="${session.logincust?.name =='관리자'}">삭제하기
+                        </button>
                         <!-- <a th:href="@{/cart/addcartimpl(item_id=${item.getId()})}">-->
-                        <button id="addCartBtn" class="btn btn-secondary btn-lg">장바구니 추가</button>
+                        <button id="addCartBtn" class="btn btn-secondary btn-lg"
+                                th:unless="${session.logincust?.name =='관리자'}">장바구니 추가</button>
                         <!-- </a>-->
                     </div>
                 </div>

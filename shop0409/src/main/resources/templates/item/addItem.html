@@ -1,0 +1,79 @@
+<script>
+    $(document).ready(function() {
+        $('#updateBtn').click(function () {
+            $('#add_form').attr(
+                {
+                    'enctype': 'multipart/form-data',
+                    'action': '[[@{/item/addimpl}]]',
+                    'method': 'post'
+                }
+            );
+            $('#add_form').submit();
+        });
+    })
+</script>
+<!--#은 id고, .으로 불러오면 클래스를 실행해 줘 / 3번의 click = onclick 이야-->
+
+<section class="page-section portfolio">
+    <div class="masthead container">
+        <!-- Portfolio Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading text-secondary mb-0 d-inline-block">상품 등록</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            <!-- Portfolio Items-->
+            <div class="col-sm-20">
+                <div class="portfolio-item mx-auto">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i
+                                class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                </div>
+                <form id="add_form">
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-6 mb-3">-->
+<!--                            <input type="hidden" class="form-control" id="id" name="id">-->
+<!--                        </div>-->
+<!--                    </div> AI 라서 hidden으로 줘도 값을 넣어준게 된다. hidden은 결국 값이 들어가는거야.-->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name">상품명</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="price">가격</label>
+                            <input type="number" class="form-control" id="price" name="price" step="1000">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="img">상품 이미지 업로드</label>
+                            <input type="file" class="form-control" id="img" name="img">
+                            <input type="hidden" class="form-control" name="imgName" id="imgName">
+                        </div>
+                    </div>
+<!-- Date 를 Now로 줘서 자동으로 값이 입력되는거라, 이것도 null 이라고 봐야돼  <div>-->
+<!--                        <input type="hidden" class="form-control" id="rdate" name="rdate">-->
+<!--                    </div>-->
+                </form>
+                <div class="row">
+                    <div class="col-sm-20">
+                        <button id="updateBtn" class="btn btn-secondary btn-lg">등록하기</button>
+<!--                        <a th:href="">-->
+                        <button type="button" th:onclick="|location.href='@{/item}'|" class="btn btn-secondary btn-lg">취소</button>
+<!--  id 는 script 문법과 매칭 위해 필요한거라 지워도 돼 </a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

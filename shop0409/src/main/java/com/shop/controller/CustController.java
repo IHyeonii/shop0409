@@ -40,11 +40,12 @@ public class CustController {
     System.out.println(custDTO);
     try {
       custService.register(custDTO);
-      session.setAttribute("logincust", custDTO);
+      session.setAttribute("logincust", custDTO); // 이게 로그인처리, 가입하면 바로 로그인 돼
+      return "redirect:/";
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      model.addAttribute("err", "회원가입 실패, 다시 시도해주세요!");
+      model.addAttribute("center", dir+"register");
+      return "main";
     }
-    model.addAttribute("center", dir+"register");
-    return "redirect:/login";
   }
 }

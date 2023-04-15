@@ -77,7 +77,7 @@ public class CartController {
 
   @RequestMapping("/modifyimpl")
   public String modifyimpl(int id, String sign) {
-    System.out.println("카트 아이디는 " + id + "부호는 " + sign);
+//    System.out.println("카트 아이디는 " + id + "부호는 " + sign);
 
     try {
       CartsDTO cartsDTO = cartsService.get(id);

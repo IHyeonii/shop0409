@@ -46,17 +46,25 @@
                         <!-- 로그인 된 경우 -->
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/item">상품 조회</a>
                         </li>
-                        <li th:if="${session.logincust}" class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/cart">Cart</a>
+                        <li th:unless="${session.logincust?.name =='관리자'}" class="nav-item mx-0 mx-lg-1">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/cart">Cart</a>
                         </li>
+<!--                        <li th:if="${session.logincust.name} == '관리자'" class="nav-item mx-0 mx-lg-1">-->
+<!--                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/user">회원관리</a>-->
+<!--                        </li>-->
+                        <li th:if="${session.logincust?.name == '관리자'}" class="nav-item mx-0 mx-lg-1">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/user">회원관리</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
-        <div th:insert="${center} ? ${center} : main_center"></div>
+        <div th:replace="${center} ? ${center} : main_center"></div>
         <!-- Copyright Section-->
-        <section class="copyright py-4 text-center text-white">
+        <footer class="copyright py-4 text-center text-white">
             <div class="container"><small class="pre-wrap">Copyright © Your Website 2020</small></div>
-        </section>
+        </footer>
         <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
         <div class="scroll-to-top d-lg-none position-fixed"><a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a></div>
         <!-- Bootstrap core JS-->

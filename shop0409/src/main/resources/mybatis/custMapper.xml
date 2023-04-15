@@ -13,7 +13,7 @@
         INSERT INTO cust VALUES (#{id},#{pwd},#{name})
     </insert>
     <update id="update" parameterType="custDTO">
-        UPDATE cust SET name=#{name},pwd=#{pwd} WHERE id=#{id}
+        UPDATE cust SET name=#{name} WHERE id=#{id}
     </update>
     <delete id="delete" parameterType="String">
         DELETE FROM cust WHERE id=#{id}

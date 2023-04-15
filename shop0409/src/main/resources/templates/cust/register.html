@@ -1,5 +1,10 @@
 <script>
     $(document).ready(function(){
+        var msg = '[[${err}]]';
+        if (msg != '' && msg != null) {
+            alert(msg);
+        }
+
         $('#register_btn').click(function() {
             $('#register_form').attr(
                 {
@@ -10,6 +15,7 @@
             $('#register_form').submit();
         })
     })
+
 </script>
 
 <section class="page-section portfolio">
