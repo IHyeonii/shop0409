@@ -1,0 +1,72 @@
+<script>
+    $(document).ready(function() {
+
+        $('#deleteBtn').click(function () {
+            location.href = '/cart/deleteimpl?id=' + $('#id').val();
+        });
+
+        $('.modify_cnt_btn').click(function () {
+            var sign = "plus";
+            if ($(this).text() == "-") {
+                sign = "minus";
+            }
+            location.href = '/cart/modifyimpl?id=' + $(this).val() + '&sign=' + sign;
+        })
+    })
+</script>
+
+<style>
+    .item_img{
+    width: 100px;
+    }
+</style>
+
+<section class="page-section portfolio">
+    <div class="masthead container">
+        <div class="text-center">
+            <h2 class="page-section-heading text-secondary mb-0 d-inline-block">장바구니 목록</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>IMG</th>
+                <th>ITEM_NAME</th>
+                <th>ITEM_PRICE</th>
+                <th>COUNT</th>
+                <th>RDATE</th>
+                <th>DELETE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cart:${cartList}">
+                <th scope="row">1</th>
+                <td>
+                    <img class="item_img" th:src="'/img/'+${cart.item_imgname}">
+                </td>
+                <td th:text="${cart.item_name}"></td>
+                <td th:text="${#numbers.formatInteger(cart.item_price, 3, 'COMMA')}+'원'"></td>
+                <td>
+                    <button class="btn btn-sm btn-danger modify_cnt_btn" th:value="${cart.id}">-</button>
+                    [[${cart.cnt}+'개']]
+                    <!-- 이거 input으로 만들어, db에도 반영이 돼야 -->
+                    <button class="btn btn-sm btn-danger modify_cnt_btn" th:value="${cart.id}">+</button>
+                </td>
+                <td th:text="${#dates.format(cart.rdate, 'yyyy-MM-dd')}"></td>
+                <td>
+                    <button type="button" id="deleteBtn" class="btn btn-secondary">DELETE</button>
+                </td>
+                <td>
+                    <input type="hidden" id="id" th:value="${cart.id}" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

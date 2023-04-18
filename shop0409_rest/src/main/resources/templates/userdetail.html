@@ -1,0 +1,71 @@
+<script>
+    $(document).ready(function() {
+        $('#updateBtn').click(function () {
+            $('#detail_form').attr(
+                {
+                    'action': '[[@{/modifyimpl}]]',
+                    'method': 'post'
+                }
+            );
+            $('#detail_form').submit();
+        });
+
+        $('#deleteBtn').click(function () {
+            var c = confirm('삭제하시겠습니까?');
+            if( c == true ) {
+            location.href = '/deleteimpl?id=' + $('#id').val();
+            }
+        });
+
+    })
+</script>
+
+<section class="page-section portfolio">
+    <div class="masthead container">
+        <!-- Portfolio Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading text-secondary mb-0 d-inline-block">User Detail</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            <!-- Portfolio Items-->
+            <div class="col-sm-20">
+                <div class="portfolio-item mx-auto">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                </div>
+                <form id="detail_form">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" th:value="${user.getId()}" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name">NAME</label>
+                            <input type="text" class="form-control" id="name" name="name" th:value="${user.getName()}" required>
+                        </div>
+                    </div>
+<!--                    <div>-->
+<!--                        <input type"="hidden class="form-control" id="pwd" name="pwd" th:value="${user.getPwd()}" >-->
+<!--                    </div>-->
+
+                </form>
+                <div class="row">
+                    <div class="col-sm-20">
+                        <button id="updateBtn" class="btn btn-secondary btn-lg">수정하기</button>
+                        <button id="deleteBtn" class="btn btn-secondary btn-lg">삭제하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
